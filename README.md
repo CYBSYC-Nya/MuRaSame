@@ -7,6 +7,7 @@
 [![DSH Plugin](https://img.shields.io/badge/DSH-Plugin-2fbf71)](https://github.com/CYBSYC-Nya/MuRaSame)
 [![Version](https://img.shields.io/badge/version-1.23.0-147a57)](https://github.com/CYBSYC-Nya/MuRaSame)
 [![License](https://img.shields.io/badge/license-MIT-2fbf71)](LICENSE)
+[![CI](https://github.com/CYBSYC-Nya/MuRaSame/actions/workflows/ci.yml/badge.svg)](https://github.com/CYBSYC-Nya/MuRaSame/actions/workflows/ci.yml)
 
 MuRaSame 不是一个“多几个按钮”的素材面板。它把本机创作引擎、DeepSeek Harness 的 Agent 循环和 12 个 `creative_*` 工具接在一起：用户给目标，Agent 先计划，再调用工具，校验生成的文件，最后把成品存进项目。
 
@@ -97,18 +98,24 @@ creative_project_save 入库，项目快照可回滚
 
 ### 1. 安装插件
 
-从本地目录安装：
-
-```text
-plugin_manager.install_bundle("D:/DSH-Plugins/dsh-creative-console")
+```bash
+git clone https://github.com/CYBSYC-Nya/MuRaSame.git
 ```
 
-或把仓库克隆到本地后指向该目录。刷新 DSH 后，左侧出现 **MRS** 竖栏；可上下拖动，点开向右展开。
+然后从本地目录安装：
+
+```text
+plugin_manager.install_bundle("<你的路径>/MuRaSame")
+```
+
+刷新 DSH 后，左侧出现 **MRS** 竖栏；可上下拖动，点开向右展开。
 
 ### 2. 安装 Agent preset（推荐）
 
+本仓库已包含 preset，安装仓库里的 `preset/` 子目录：
+
 ```text
-plugin_manager.install_bundle("D:/DSH-Plugins/murasame-preset")
+plugin_manager.install_bundle("<你的路径>/MuRaSame/preset")
 ```
 
 新建会话时选择 **MuRaSame 创作助手**。
@@ -150,9 +157,14 @@ dsh-creative-console/
 ├─ cordis.patch.yml      # DSH bundle 声明
 ├─ lib/image_worker.py   # Pillow 图片处理
 ├─ bin/realesrgan/       # 可选本地超分（模型不在此仓库）
+├─ preset/               # MuRaSame Agent preset（含独立 package/patch）
 ├─ docs/                 # 预览图
-├─ tests/smoke.mjs       # HTTP 冒烟测试
+├─ tests/                # static.mjs 静态校验 + smoke.mjs HTTP 冒烟
+├─ .github/workflows/    # CI：结构、工具数与 preset 校验
 ├─ MODELS.md             # 模型补充说明
+├─ CHANGELOG.md          # 版本变更
+├─ CONTRIBUTING.md       # 贡献说明
+├─ SECURITY.md           # Key 与本地文件边界
 └─ README.zh.md          # 更完整的中文文档
 ```
 
@@ -175,10 +187,20 @@ dsh-creative-console/
 ## 开发
 
 ```bash
-node tests/smoke.mjs
+npm test
 ```
 
-需要 DSH 正在运行，且 `DSH_CREATIVE_URL` 指向插件 API 根地址（默认 `http://127.0.0.1:49670/api-ext/creative-console`）。
+静态校验：必需文件、版本、12 个 Agent 工具名、preset 版本与声明。CI 每次 push/PR 自动运行。
+
+需要真实 HTTP 冒烟时：
+
+```bash
+DSH_CREATIVE_URL=http://127.0.0.1:49670/api-ext/creative-console npm run test:smoke
+```
+
+需要 DSH 正在运行。
+
+变更见 [CHANGELOG.md](CHANGELOG.md)，贡献流程见 [CONTRIBUTING.md](CONTRIBUTING.md)，密钥与本地文件边界见 [SECURITY.md](SECURITY.md)。
 
 ## License
 
