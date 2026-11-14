@@ -3,6 +3,14 @@
   "version": "1.23.0",
   "description": "MuRaSame 创作助手 — collapsible image generation / optimisation, video editing with one-click SRT subtitles and subtitle voiceover, Premiere XML hand-off and multi-voice TTS console for DeepSeek Harness. 制作者：丛雨不善言辞。",
   "author": "丛雨不善言辞",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CYBSYC-Nya/MuRaSame.git"
+  },
+  "homepage": "https://github.com/CYBSYC-Nya/MuRaSame",
+  "bugs": {
+    "url": "https://github.com/CYBSYC-Nya/MuRaSame/issues"
+  },
   "type": "module",
   "main": "./index.js",
   "exports": {
@@ -22,6 +30,7 @@
     "tests/",
     "README.md",
     "README.zh.md",
+    "MODELS.md",
     "LICENSE"
   ],
   "engines": {
@@ -41,7 +50,8 @@
   ],
   "license": "MIT",
   "scripts": {
-    "test": "node tests/smoke.mjs"
+    "test": "node tests/static.mjs",
+    "test:smoke": "node tests/smoke.mjs"
   },
   "meta": {
     "title": "MuRaSame 创作助手",
