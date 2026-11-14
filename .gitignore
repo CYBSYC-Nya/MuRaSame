@@ -1,0 +1,15 @@
+# Runtime output
+.creative-console/
+outputs/
+*.log
+*.tmp
+
+# Dependencies / builds
+node_modules/
+dist/
+build/
+
+# Local config / secrets
+.env
+.env.*
+*.key

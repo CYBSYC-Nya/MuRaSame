@@ -1,0 +1,6 @@
+# dsh-creative-console bundle patch: inserts the host half over dsh-base.
+# The client half is discovered from package.json's dsh.client.inject and fills
+# the sidebar.footer.action slot with the collapsible console.
+- insert:
+    - id: creative-console
+      name: 'dsh-creative-console'

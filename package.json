@@ -1,0 +1,64 @@
+{
+  "name": "dsh-creative-console",
+  "version": "1.23.0",
+  "description": "MuRaSame 创作助手 — collapsible image generation / optimisation, video editing with one-click SRT subtitles and subtitle voiceover, Premiere XML hand-off and multi-voice TTS console for DeepSeek Harness. 制作者：丛雨不善言辞。",
+  "author": "丛雨不善言辞",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "lib/",
+    "bin/",
+    "icon.png",
+    "icon.svg",
+    "docs/",
+    "tests/",
+    "README.md",
+    "README.zh.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0",
+    "dsh": ">=0.2.0-rc.2"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "image",
+    "video",
+    "ffmpeg",
+    "tts",
+    "rvc",
+    "voice"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "test": "node tests/smoke.mjs"
+  },
+  "meta": {
+    "title": "MuRaSame 创作助手",
+    "author": "丛雨不善言辞",
+    "description": "MuRaSame 创作助手：AI 生图与超分、多段视频剪辑与按描述剪、多声线 TTS、录音自定义声线、PR XML 交接。制作者：丛雨不善言辞。"
+  },
+  "icon": "./icon.png",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-sidebar",
+        "@deepseek-ai/dsh-client-ui-tool"
+      ]
+    }
+  }
+}
