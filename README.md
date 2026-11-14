@@ -7,7 +7,6 @@
 [![DSH Plugin](https://img.shields.io/badge/DSH-Plugin-2fbf71)](https://github.com/CYBSYC-Nya/MuRaSame)
 [![Version](https://img.shields.io/badge/version-1.23.0-147a57)](https://github.com/CYBSYC-Nya/MuRaSame)
 [![License](https://img.shields.io/badge/license-MIT-2fbf71)](LICENSE)
-[![CI](https://github.com/CYBSYC-Nya/MuRaSame/actions/workflows/ci.yml/badge.svg)](https://github.com/CYBSYC-Nya/MuRaSame/actions/workflows/ci.yml)
 
 MuRaSame 不是一个“多几个按钮”的素材面板。它把本机创作引擎、DeepSeek Harness 的 Agent 循环和 12 个 `creative_*` 工具接在一起：用户给目标，Agent 先计划，再调用工具，校验生成的文件，最后把成品存进项目。
 
@@ -160,7 +159,6 @@ dsh-creative-console/
 ├─ preset/               # MuRaSame Agent preset（含独立 package/patch）
 ├─ docs/                 # 预览图
 ├─ tests/                # static.mjs 静态校验 + smoke.mjs HTTP 冒烟
-├─ .github/workflows/    # CI：结构、工具数与 preset 校验
 ├─ MODELS.md             # 模型补充说明
 ├─ CHANGELOG.md          # 版本变更
 ├─ CONTRIBUTING.md       # 贡献说明
@@ -190,7 +188,7 @@ dsh-creative-console/
 npm test
 ```
 
-静态校验：必需文件、版本、12 个 Agent 工具名、preset 版本与声明。CI 每次 push/PR 自动运行。
+静态校验：必需文件、版本、12 个 Agent 工具名、preset 版本与声明。
 
 需要真实 HTTP 冒烟时：
 
