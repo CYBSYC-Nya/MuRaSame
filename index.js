@@ -1255,6 +1255,7 @@ export function apply(ctx, rowConfig) {
 
     let pillow = null
     let edgeVersion = null
+    let edgeModuleVersion = null
     if (python) {
       try {
         const result = await run(python, ['-c', 'import PIL; print(PIL.__version__)'], { timeout: 15_000 })
@@ -1269,6 +1270,19 @@ export function apply(ctx, rowConfig) {
         if (result.code === 0) edgeVersion = result.stdout.trim()
       } catch {
         /* version is optional */
+      }
+    }
+    // Without an edge-tts executable the synthesis falls back to
+    // `python -m edge_tts`; treat the engine as available only when that module
+    // really imports, so the console does not advertise a broken TTS engine.
+    if (!edgeTts && python) {
+      try {
+        const result = await run(python, ['-c', 'import edge_tts; print(edge_tts.__version__)'], {
+          timeout: 15_000,
+        })
+        if (result.code === 0) edgeModuleVersion = result.stdout.trim()
+      } catch {
+        /* tts engine unavailable */
       }
     }
 
@@ -1289,9 +1303,9 @@ export function apply(ctx, rowConfig) {
         version: ffmpeg ? await ffmpegVersion(ffmpeg) : null,
       },
       tts: {
-        ok: Boolean(edgeTts || python),
+        ok: Boolean(edgeTts || edgeModuleVersion),
         engine: 'edge-tts',
-        version: edgeVersion,
+        version: edgeVersion ?? edgeModuleVersion,
         command: edgeTts,
         python,
       },
